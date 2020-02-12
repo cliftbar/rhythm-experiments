@@ -1,0 +1,8 @@
+C:\Users\cwbarclift\MyFiles\Code\CSharp\RhythmExperiments2\RhythmExperiments2\obj\Debug\RhythmExperiments2.csprojAssemblyReference.cache
+C:\Users\cwbarclift\MyFiles\Code\CSharp\RhythmExperiments2\RhythmExperiments2\bin\Debug\RhythmExperiments2.exe.config
+C:\Users\cwbarclift\MyFiles\Code\CSharp\RhythmExperiments2\RhythmExperiments2\bin\Debug\RhythmExperiments2.exe
+C:\Users\cwbarclift\MyFiles\Code\CSharp\RhythmExperiments2\RhythmExperiments2\bin\Debug\RhythmExperiments2.pdb
+C:\Users\cwbarclift\MyFiles\Code\CSharp\RhythmExperiments2\RhythmExperiments2\obj\Debug\RhythmExperiments2.exe
+C:\Users\cwbarclift\MyFiles\Code\CSharp\RhythmExperiments2\RhythmExperiments2\obj\Debug\RhythmExperiments2.pdb
+C:\Users\cwbarclift\MyFiles\Code\CSharp\RhythmExperiments2\RhythmExperiments2\bin\Debug\ConsoleGameEngine.dll
+C:\Users\cwbarclift\MyFiles\Code\CSharp\RhythmExperiments2\RhythmExperiments2\obj\Debug\RhythmExperiments2.csproj.CopyComplete
