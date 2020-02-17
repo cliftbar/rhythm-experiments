@@ -20,6 +20,7 @@ namespace RhythmExperiments2
 		DateTime _starttime;
 		int referenceBeat;
 		Random randomGen;
+		List<BeatSymbol> beats;
 
 		private static void Main(string[] args)
 		{
@@ -46,12 +47,16 @@ namespace RhythmExperiments2
 			//AsyncSimpleTimingWorker worker3 = new AsyncSimpleTimingWorker(this._master, "Async Worker 3", this.Engine);
 			//AsyncSimpleTimingWorker worker4 = new AsyncSimpleTimingWorker(master, "Async Worker 4");
 
+			this.beats = new List<BeatSymbol>();
+			this.beats.Add(new BeatSymbol(this.Engine, 1, 5, 1));
+
 			//this._master.RunLoop(this);
 			//System.Threading.Thread masterThread = new System.Threading.Thread(this._master.AIORunLoop);
 			this._master._timingSource.start();
 
 			// thread out the Timing Loop
 			Task.Run(this._master.AIORunLoop);
+
 			//Engine.Frame(new Point(1, 0), new Point(10, 10), 7);
 			//masterThread.Start();
 			//this._master.AIORunLoop();
@@ -82,27 +87,7 @@ namespace RhythmExperiments2
 
 			if (this.referenceBeat + 1 <= this._master.position_beat)
 			{
-				//double position = this._master.position_beat;
-
-				//double offset = position - Math.Round(position);
-				//double timing = (this._master.position_beat - (this.referenceBeat + 1));
-				//Engine.WriteText(new Point(2, 20), $"Timing Check:", 1);
-				//Engine.WriteText(new Point(2, 21), $"{offset}", 1);
-
-				//Engine.ClearBuffer();
-				////randomGen = new Random();
-
-				//for (int i = 0; i < 5; i++)
-				//{
-				//	int posx = randomGen.Next(0, 15);
-				//	int posy = randomGen.Next(0, 15);
-				//	int color = randomGen.Next(1, 16);
-
-				//	Engine.SetPixel(new Point(posx, posy), color);
-				//}
-
-				//Engine.ClearBuffer();
-				//randomGen = new Random();
+				Engine.ClearBuffer();
 
 				int posx = 3; //randomGen.Next(0, 15);
 				int posy = 3; //randomGen.Next(0, 15);
@@ -110,30 +95,55 @@ namespace RhythmExperiments2
 
 				Engine.SetPixel(new Point(posx, posy), color);
 
+				this.beats.ForEach(x => x.UpdateRender());
+
 				this.referenceBeat += 1;
 			}
+
 			
-			//Point p = new Point(10, 20);
-			//Engine.WriteText(p, "test", 8);
-
-			//bool doLoopUpdate = true;
-
-			//try
-			//{
-			//	if (doLoopUpdate) {
-			//		this._sleeptime = this._master.RunLoopUpdate(this._starttime, this._sleeptime);
-			//	}
-			//}
-			//catch (ExecutionEngineException)
-			//{
-			//	doLoopUpdate = false;
-			//}
+			
 
 			Engine.DisplayBuffer();
 			
+		}
+	}
 
-			//System.Threading.Thread.Sleep(this._sleeptime);
-			//Console.WriteLine("test");
+	class BeatSymbol
+	{
+		public double startPos { get; private set; }
+		public double endPos { get; private set; }
+		public double currentPos { get; private set; }
+		public double speed { get; private set; }
+		public double posStep { get; private set; }
+		private ConsoleEngine _renderer;
+
+		public BeatSymbol(ConsoleEngine renderer, double startPos, double endPos, double speed)
+		{
+			this._renderer = renderer;
+			this.startPos = startPos;
+			this.endPos = endPos;
+			this.speed = speed;
+			this.currentPos = this.startPos;
+			this.posStep = speed;
+		}
+
+		public void UpdateRender()
+		{
+			if (0 < this.posStep && this.endPos < this.currentPos )
+			{
+				this.currentPos = this.startPos;
+			}
+			else if (this.posStep < 0 && this.currentPos < this.endPos)
+			{
+
+			}
+			this.currentPos += this.posStep;
+
+			Debug.WriteLine(this.posStep);
+
+			// render
+			this._renderer.SetPixel(new Point((int)this.currentPos, 5), 3);
+
 		}
 	}
 
